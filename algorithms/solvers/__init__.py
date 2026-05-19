@@ -1,0 +1,1 @@
+from algorithms.solvers.solvers import AStarSolve

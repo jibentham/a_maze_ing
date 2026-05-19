@@ -1,6 +1,7 @@
 import random
-from maze_gen import Cell, Grid
-from dfs_backtracker import get_unvisited_neighbors, remove_wall, generate_recursive_backtracker
+from maze.maze_gen import Grid
+from maze.maze_gen_utils import is_sealed
+from algorithms.generators.dfs_backtracker import remove_wall
 
 
 def generate_prims(grid):
@@ -8,26 +9,25 @@ def generate_prims(grid):
     start.visited = True
     yield start
 
-    # frontier: list of (direction, from_cell, to_cell)
     frontier = []
 
     def add_frontier(cell):
         row, col = cell.y, cell.x
         if row > 0:
             n = grid.cells[row - 1][col]
-            if not n.visited:
+            if not n.visited and not is_sealed(n):
                 frontier.append(('N', cell, n))
         if row < grid.height - 1:
             n = grid.cells[row + 1][col]
-            if not n.visited:
+            if not n.visited and not is_sealed(n):
                 frontier.append(('S', cell, n))
         if col < grid.width - 1:
             n = grid.cells[row][col + 1]
-            if not n.visited:
+            if not n.visited and not is_sealed(n):
                 frontier.append(('E', cell, n))
         if col > 0:
             n = grid.cells[row][col - 1]
-            if not n.visited:
+            if not n.visited and not is_sealed(n):
                 frontier.append(('W', cell, n))
 
     add_frontier(start)

@@ -1,35 +1,28 @@
 import random
-from maze_gen import Cell, Grid
+from maze.maze_gen_utils import is_sealed
+from maze.maze_gen import Cell, Grid
 
 def get_unvisited_neighbors(cell, grid):
     neighbors = []
-    row = cell.y # y = vertical
-    col = cell.x # x is horizontal
+    row = cell.y
+    col = cell.x
 
-    # North: row above is there and is unvisited
-    if row > 0:                         # is there a cell above
-        n = grid.cells[row - 1][col]    # grab it
-        if not n.visited:
+    if row > 0:
+        n = grid.cells[row - 1][col]
+        if not n.visited and not is_sealed(n):
             neighbors.append(('N', n))
-
-    # South: row below is there and is unvisited
     if row < grid.height - 1:
         n = grid.cells[row + 1][col]
-        if not n.visited:
+        if not n.visited and not is_sealed(n):
             neighbors.append(('S', n))
-
-    # East: column to the right exists and is unvisited
     if col < grid.width - 1:
         n = grid.cells[row][col + 1]
-        if not n.visited:
+        if not n.visited and not is_sealed(n):
             neighbors.append(('E', n))
-
-    # West: column to the left exists and is unvisited
     if col > 0:
         n = grid.cells[row][col - 1]
-        if not n.visited:
+        if not n.visited and not is_sealed(n):
             neighbors.append(('W', n))
-    
     return neighbors
 
 

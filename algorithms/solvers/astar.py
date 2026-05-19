@@ -1,6 +1,6 @@
 from queue import PriorityQueue
 from itertools import count
-
+from maze.maze_gen import Grid
 
 def heuristic(cell, grid):
     # estimate distance to goal using horizontal + vertical steps

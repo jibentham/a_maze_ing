@@ -1,0 +1,17 @@
+[maze]
+width = 12
+height = 10
+entrance = 0,0
+exit = 9,11
+seed = none
+perfect = true
+
+[algorithms]
+generator = dfs
+solver = astar
+
+[colors]
+entrance = GREEN
+exit = RED
+path = YELLOW
+exploring = CYAN

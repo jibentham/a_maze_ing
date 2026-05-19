@@ -1,0 +1,1 @@
+from maze.maze_gen import Cell, Grid
