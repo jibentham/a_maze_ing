@@ -14,7 +14,6 @@ SOLVERS = {
 
 RENDERERS = {
     'ascii':  ASCIIRenderer,
-    'silent': SilentRenderer,
 }
 
 def get_generator(name):

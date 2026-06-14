@@ -1,6 +1,6 @@
-from algorithms.base import MazeRender
+from algorithms.base import MazeRenderer
 
-class ASCIIRenderer(MazeRender):
+class ASCIIRenderer(MazeRenderer):
     def __init__(self, colors=None):
         self.colors = colors or {
             "entrance":  "\033[32m",
@@ -32,9 +32,3 @@ class ASCIIRenderer(MazeRender):
             mid += "|"
             print(mid)
             print(bot)
-
-
-class SilentRenderer(MazeRender):
-    """Renders nothing — useful for benchmarking or testing."""
-    def render(self, grid, exploring=None, path=None):
-        pass
