@@ -34,6 +34,7 @@ class Cell:
             self.binary = self.binary[:idx] + self.replacement + self.binary[idx + 1:]
 
     def binary_to_hex(self):
+        self.hexadecimal = []
         integer_value = int(self.binary, 2)
         hex_value = hex(integer_value)
         self.hexadecimal.append(hex_value[2:])
@@ -65,14 +66,34 @@ class Grid:
     def set_exit(self, row, col):
         self.exit = self.cells[row][col]
 
-    def print_grid(self):
-        for row in self.cells:
-            line = ""
-            for cell in row:
-                cell.check_walls()
-                cell.binary_to_hex()
-                line += ''.join(cell.hexadecimal)
-            print(line)
+    def print_grid(self, filename='output.txt', path=None, came_from=None):
+        with open(filename, 'w') as f:
+            for row in self.cells:
+                line = ""
+                for cell in row:
+                    cell.check_walls()
+                    cell.binary_to_hex()
+                    line += ''.join(cell.hexadecimal)
+                f.write(line + '\n')
+            if path and came_from:
+                directions = self._extract_directions(path, came_from)
+                f.write('\n' + directions + '\n')
+
+    def _extract_directions(self, path, came_from):
+        direction_map = {
+            (-1, 0): 'N',
+            (1, 0):  'S',
+            (0, 1):  'E',
+            (0, -1): 'W',
+        }
+        result = ""
+        for i in range(1, len(path)):
+            prev = path[i - 1]
+            curr = path[i]
+            dy = curr.y - prev.y
+            dx = curr.x - prev.x
+            result += direction_map.get((dy, dx), '?')
+        return result
 
     def print_grid_ascii(self, exploring=None, path=None):
     # Top border

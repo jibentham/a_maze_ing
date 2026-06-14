@@ -36,20 +36,26 @@ class MazeRunner:
 
     def solve(self):
         path = None
-        for event, data in self.solver.solve(self.grid):
+        came_from = None
+        path_cells = None
+
+        for event, *data in self.solver.solve(self.grid):
             if event == 'exploring':
                 os.system('clear')
                 self.renderer.render(
                     self.grid,
-                    exploring=(data.y, data.x)
+                    exploring=(data[0].y, data[0].x)
                 )
             elif event == 'solution':
-                path = {(cell.y, cell.x) for cell in data}
+                path_cells = data[0]
+                came_from = data[1]
+                path = {(cell.y, cell.x) for cell in path_cells}
                 os.system('clear')
                 self.renderer.render(self.grid, path=path)
                 break
-        return path
+        return path_cells, came_from
 
     def run(self):
         self.build()
-        return self.solve()
+        path_cells, came_from = self.solve()
+        self.grid.print_grid(path=path_cells, came_from=came_from)
