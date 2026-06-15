@@ -75,6 +75,8 @@ class Grid:
                     cell.binary_to_hex()
                     line += ''.join(cell.hexadecimal)
                 f.write(line + '\n')
+            f.write(f"\n{self.entrance.x}, {self.entrance.y}\n")
+            f.write(f"{self.exit.x}, {self.exit.y}")
             if path and came_from:
                 directions = self._extract_directions(path, came_from)
                 f.write('\n' + directions + '\n')
