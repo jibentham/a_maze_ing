@@ -1,7 +1,7 @@
 from algorithms.dfs import DFSGenerator
 from algorithms.prims import PrimsGenerator
 from algorithms.astar import AStarSolver
-from rendering.renderers import ASCIIRenderer, SilentRenderer
+from rendering.renderers import ASCIIRenderer
 
 GENERATORS = {
     'dfs':   DFSGenerator,

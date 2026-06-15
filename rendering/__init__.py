@@ -1,1 +1,1 @@
-from rendering.renderers import ASCIIRenderer, SilentRenderer
+from rendering.renderers import ASCIIRenderer
