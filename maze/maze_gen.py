@@ -1,11 +1,3 @@
-RESET = "\033[0m"
-RED = "\033[31m"
-GREEN = "\033[32m"
-YELLOW = "\033[33m"
-CYAN = "\033[36m"
-
-
-
 class Cell:
     def __init__(self, x: int, y: int):
         self.x = x
@@ -36,7 +28,7 @@ class Cell:
     def binary_to_hex(self):
         self.hexadecimal = []
         integer_value = int(self.binary, 2)
-        hex_value = hex(integer_value)
+        hex_value = hex(integer_value).upper()
         self.hexadecimal.append(hex_value[2:])
 
 
