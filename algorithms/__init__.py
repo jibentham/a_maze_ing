@@ -1,7 +1,7 @@
 from algorithms.dfs import DFSGenerator
 from algorithms.prims import PrimsGenerator
 from algorithms.astar import AStarSolver
-from rendering.renderers import ASCIIRenderer
+from rendering.renderers import ASCIIRenderer, UnicodeRenderer
 
 GENERATORS = {
     'dfs':   DFSGenerator,
@@ -14,6 +14,7 @@ SOLVERS = {
 
 RENDERERS = {
     'ascii':  ASCIIRenderer,
+    'unicode': UnicodeRenderer,
 }
 
 def get_generator(name):

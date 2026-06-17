@@ -29,6 +29,7 @@ class Config:
         # algorithms
         self.generator = cfg.get("algorithms", "generator")
         self.solver    = cfg.get("algorithms", "solver")
+        self.renderer = cfg.get("algorithms", "renderer", fallback="ascii")
 
         # colors
         self.colors = {

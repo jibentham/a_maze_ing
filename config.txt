@@ -9,6 +9,7 @@ perfect = true
 [algorithms]
 generator = dfs
 solver = astar
+renderer = unicode
 
 [colors]
 entrance = GREEN
