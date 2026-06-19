@@ -56,7 +56,7 @@ class MazeRunner:
                 self.came_from = data[1]
                 self.path = {(cell.y, cell.x) for cell in self.path_cells}
                 os.system('clear')
-                self.renderer.render(self.grid, path=self.path)
+                self.renderer.render(self.grid)
                 break
         return self.path_cells, self.came_from
 
@@ -69,7 +69,7 @@ class MazeRunner:
             self.show_path = not self.show_path
             os.system('clear')
             if self.show_path:
-                self.renderer.render(self.grid, path=self.path)
+                self.renderer.render(self.grid, path=self.path if self.show_path else None)
             else:
                 self.renderer.render(self.grid)
         elif choice == '3':

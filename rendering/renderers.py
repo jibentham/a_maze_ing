@@ -37,7 +37,7 @@ class ASCIIRenderer(MazeRenderer):
 
 class UnicodeRenderer(MazeRenderer):
     def __init__(self, colors=None):
-        self.colors = colors or {
+        defaults = {
             "entrance":  "\033[35m",
             "exit":      "\033[31m",
             "path":      "\033[37m",
@@ -45,6 +45,9 @@ class UnicodeRenderer(MazeRenderer):
             "wall":      "\033[34m",
             "RESET":     "\033[0m",
         }
+        if colors:
+            defaults.update(colors)
+        self.colors = defaults
         self.color_index = 0
 
     def render(self, grid, exploring=None, path=None):
@@ -96,8 +99,8 @@ class UnicodeRenderer(MazeRenderer):
                 if (ry, cx) in markers:
                     marker, color = markers[(ry, cx)]
                     line += color + marker + self.colors['RESET']
-                elif cell == '■■':
-                    line += self.colors['wall'] + '■■' + self.colors['RESET']
+                elif cell == '██':
+                    line += self.colors['wall'] + '██' + self.colors['RESET']
                 else:
                     line += cell
             print(line)

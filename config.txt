@@ -1,8 +1,8 @@
 [maze]
-width = 12
-height = 10
+width = 20
+height = 20
 entrance = 0,0
-exit = 9,11
+exit = 19,19
 seed = none
 perfect = true
 
@@ -13,6 +13,7 @@ renderer = unicode
 
 [colors]
 entrance = GREEN
-exit = RED
+exit = WHITE
 path = YELLOW
 exploring = CYAN
+wall = RED
