@@ -70,10 +70,10 @@ class Grid:
             f.write(f"\n{self.entrance.x}, {self.entrance.y}\n")
             f.write(f"{self.exit.x}, {self.exit.y}")
             if path and came_from:
-                directions = self._extract_directions(path, came_from)
+                directions = self._extract_directions(path)
                 f.write('\n' + directions + '\n')
 
-    def _extract_directions(self, path, came_from):
+    def _extract_directions(self, path):
         direction_map = {
             (-1, 0): 'N',
             (1, 0):  'S',
@@ -88,27 +88,3 @@ class Grid:
             dx = curr.x - prev.x
             result += direction_map.get((dy, dx), '?')
         return result
-
-    def print_grid_ascii(self, exploring=None, path=None):
-    # Top border
-        print("+" + "---+".join([""] * (self.width + 1)))
-
-        for r, row in enumerate(self.cells):
-            mid = ""
-            bot = "+"
-            for c, cell in enumerate(row):
-                mid += "|" if cell.walls['W'] else " "
-                if (r, c) == (self.entrance.y, self.entrance.x):
-                    mid += f"{GREEN} X {RESET}"
-                elif (r, c) == (self.exit.y, self.exit.x):
-                    mid += f"{RED} O {RESET}"
-                elif path and (r, c) in path:
-                    mid += f"{YELLOW} . {RESET}"
-                elif exploring and (r, c) == exploring:
-                    mid += f"{CYAN} ? {RESET}"
-                else:
-                    mid += "   "
-                bot += "---+" if cell.walls['S'] else "   +"
-            mid += "|"   # rightmost wall
-            print(mid)
-            print(bot)
