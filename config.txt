@@ -5,6 +5,8 @@ entrance = 0,0
 exit = 19,19
 seed = none
 perfect = true
+generation_delay = 0.05
+solve_delay = 0.02
 
 [algorithms]
 generator = dfs

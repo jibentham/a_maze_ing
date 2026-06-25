@@ -1,7 +1,9 @@
+from __future__ import annotations
 import configparser
 import random
+from typing import Optional
 
-ANSI_COLORS = {
+ANSI_COLORS: dict[str, str] = {
     "RED":     "\033[31m",
     "GREEN":   "\033[32m",
     "YELLOW":  "\033[33m",
@@ -12,27 +14,32 @@ ANSI_COLORS = {
     "RESET":   "\033[0m",
 }
 
+
 class Config:
-    def __init__(self, path="config.txt"):
-        cfg = configparser.ConfigParser()
+    def __init__(self, path: str = "config.txt") -> None:
+        cfg: configparser.ConfigParser = configparser.ConfigParser()
         cfg.read(path)
 
         # maze
-        self.width    = cfg.getint("maze", "width")
-        self.height   = cfg.getint("maze", "height")
-        self.entrance = tuple(int(x) for x in cfg.get("maze", "entrance").split(","))
-        self.exit     = tuple(int(x) for x in cfg.get("maze", "exit").split(","))
-        self.perfect  = cfg.getboolean("maze", "perfect")
-        seed          = cfg.get("maze", "seed")
-        self.seed     = int(seed) if seed.lower() != "none" else None
+        self.width:    int = cfg.getint("maze", "width")
+        self.height:   int = cfg.getint("maze", "height")
+        self.entrance: tuple[int, int] = tuple(int(x) for x in cfg.get("maze", "entrance").split(","))  # type: ignore[assignment]
+        self.exit:     tuple[int, int] = tuple(int(x) for x in cfg.get("maze", "exit").split(","))  # type: ignore[assignment]
+        self.perfect:  bool = cfg.getboolean("maze", "perfect")
+        seed:          str = cfg.get("maze", "seed")
+        self.seed:     Optional[int] = int(seed) if seed.lower() != "none" else None
 
         # algorithms
-        self.generator = cfg.get("algorithms", "generator")
-        self.solver    = cfg.get("algorithms", "solver")
-        self.renderer = cfg.get("algorithms", "renderer", fallback="ascii")
+        self.generator: str = cfg.get("algorithms", "generator")
+        self.solver:    str = cfg.get("algorithms", "solver")
+        self.renderer:  str = cfg.get("algorithms", "renderer", fallback="ascii")
+
+        # delays
+        self.generation_delay: float = cfg.getfloat("maze", "generation_delay", fallback=0.05)
+        self.solve_delay:      float = cfg.getfloat("maze", "solve_delay", fallback=0.02)
 
         # colors
-        self.colors = {
+        self.colors: dict[str, str] = {
             k: ANSI_COLORS[v.upper()]
             for k, v in cfg.items("colors")
         }
