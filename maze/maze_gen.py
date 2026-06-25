@@ -66,9 +66,9 @@ class Grid:
 
     def print_grid(
             self,
-            filename: str='output.txt',
-            path: Optional[list[Cell]]=None,
-            came_from: Optional[dict[Cell, Cell]]=None
+            filename: str = 'output.txt',
+            path: Optional[list[Cell]] = None,
+            came_from: Optional[dict[Cell, Cell]] = None
     ) -> None:
         assert self.entrance is not None
         assert self.exit is not None

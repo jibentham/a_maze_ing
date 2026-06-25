@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Generator, Union, Optional
+from typing import Generator, Union
 from queue import PriorityQueue
 from itertools import count
 from algorithms.base import MazeSolver
@@ -9,7 +9,10 @@ from maze.maze_gen import Cell, Grid
 class AStarSolver(MazeSolver):
     def solve(
         self, grid: Grid
-    ) -> Generator[Union[tuple[str, Cell] | tuple [str, list[Cell], dict[Cell, Cell]]], None, None]: 
+    ) -> Generator[
+            Union[tuple[str, Cell]
+                  | tuple[str, list[Cell], dict[Cell, Cell]]], None, None
+            ]:
         assert grid.entrance is not None
         assert grid.exit is not None
         open_set: PriorityQueue[tuple[int, int, Cell]] = PriorityQueue()                         # cells to explore, cheapest first
@@ -18,7 +21,7 @@ class AStarSolver(MazeSolver):
         f_score: dict[Cell, int] = {grid.entrance: self._heuristic(grid.entrance, grid)}  # g + estimated cost to goal
         counter = count()
 
-        open_set.put((f_score[grid.entrance], next(counter), grid.entrance)) # kick off from the start cell
+        open_set.put((f_score[grid.entrance], next(counter), grid.entrance))  # kick off from the start cell
         while not open_set.empty():
             _, __, current = open_set.get()                    # grab the most promising cell
             yield ('exploring', current)                   # animation hook
@@ -30,8 +33,8 @@ class AStarSolver(MazeSolver):
                 tentative_g: int = g_score[current] + 1        # cost to reach neighbor via current
                 if tentative_g < g_score.get(neighbor, float('inf')):  # is this a better route?
                     came_from[neighbor] = current          # record how we got here
-                    g_score[neighbor]   = tentative_g
-                    f_score[neighbor]   = tentative_g + self._heuristic(neighbor, grid)
+                    g_score[neighbor] = tentative_g
+                    f_score[neighbor] = tentative_g + self._heuristic(neighbor, grid)
                     open_set.put((f_score[neighbor], next(counter), neighbor))  # add to frontier
 
     def _heuristic(self, cell: Cell, grid: Grid) -> int:
@@ -42,12 +45,12 @@ class AStarSolver(MazeSolver):
     def _get_passable_neighbors(
         self, cell: Cell, grid: Grid
     ) -> list[tuple[Cell, str]]:
-        neighbors: list[tuple[Cell, str]]  = []
+        neighbors: list[tuple[Cell, str]] = []
         row: int = cell.y
         col: int = cell.x
         directions: dict[str, tuple[int, int]] = {
-        'N': (-1, 0), 'S': (1, 0), 'E': (0, 1), 'W': (0, -1)
-    }
+            'N': (-1, 0), 'S': (1, 0), 'E': (0, 1), 'W': (0, -1)
+        }
 
         for direction, (dy, dx) in directions.items():
             new_row: int = row + dy

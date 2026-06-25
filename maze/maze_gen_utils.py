@@ -26,7 +26,7 @@ def is_sealed(cell: Cell) -> bool:
     return cell.sealed
 
 
-def brand_maze(grid: Grid, char_gap: int=1) -> None:
+def brand_maze(grid: Grid, char_gap: int = 1) -> None:
     """Mark cells in the center of the maze to display '42'."""
     pattern: list[list[int]] = []
     for digit_row in range(5):
@@ -37,7 +37,7 @@ def brand_maze(grid: Grid, char_gap: int=1) -> None:
         pattern.append(pattern_row)
 
     pattern_h: int = len(pattern)
-    pattern_w : int = len(pattern[0])
+    pattern_w: int = len(pattern[0])
 
     start_r: int = (grid.height - pattern_h) // 2
     start_c: int = (grid.width - pattern_w) // 2
@@ -59,7 +59,7 @@ def reseal_brand(grid: Grid) -> None:
                 cell.walls = {'N': True, 'S': True, 'E': True, 'W': True}
 
 
-def add_loops(grid: Grid, count: Optional[int]=None) -> None:
+def add_loops(grid: Grid, count: Optional[int] = None) -> None:
     """Remove extra walls to create loops, making the maze imperfect."""
     count = count or (grid.width * grid.height // 10)
     opposite: dict[str, str] = {'N': 'S', 'S': 'N', 'E': 'W', 'W': 'E'}

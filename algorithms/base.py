@@ -19,7 +19,10 @@ class MazeSolver(ABC):
     @abstractmethod
     def solve(
         self, grid: Grid
-    ) -> Generator[Union[tuple[str, Cell], tuple[str, list[Cell], dict[Cell, Cell]]], None, None]:
+    ) -> Generator[
+            Union[
+                tuple[str, Cell], tuple[str, list[Cell], dict[Cell, Cell]]
+                ], None, None]:
         ...
 
 
@@ -28,7 +31,7 @@ class MazeRenderer(ABC):
     def render(
             self,
             grid: Grid,
-            exploring: Optional[tuple[int, int]]=None,
-            path: Optional[set[tuple[int, int]]]=None
+            exploring: Optional[tuple[int, int]] = None,
+            path: Optional[set[tuple[int, int]]] = None
     ) -> None:
         ...

@@ -15,7 +15,9 @@ class DFSGenerator(MazeGenerator):
         yield current
 
         while True:
-            neighbors: list[tuple[str, Cell]] = self._get_unvisited_neighbors(current, grid)
+            neighbors: list[tuple[str, Cell]] = (
+                    self._get_unvisited_neighbors(current, grid)
+                    )
 
             if neighbors:
                 direction: str

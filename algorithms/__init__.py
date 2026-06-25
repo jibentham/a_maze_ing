@@ -27,21 +27,32 @@ _register()
 def get_generator(name: str) -> MazeGenerator:
     cls = GENERATORS.get(name)
     if not cls:
-        raise ValueError(f"Unknown generator: '{name}'. Available: {list(GENERATORS.keys())}")
+        raise ValueError(
+                f"""Unknown generator: '{name}'.
+                 Available: {list(GENERATORS.keys())}"""
+                )
     return cls()
 
 
 def get_solver(name: str) -> MazeSolver:
     cls = SOLVERS.get(name)
     if not cls:
-        raise ValueError(f"Unknown solver: '{name}'. Available: {list(SOLVERS.keys())}")
+        raise ValueError(
+                f"""Unknown solver: '{name}'.
+                 Available: {list(SOLVERS.keys())}"""
+                )
     return cls()
 
 
-def get_renderer(name: str, colors: Optional[dict[str, str]] = None) -> MazeRenderer:
+def get_renderer(
+        name: str, colors: Optional[dict[str, str]] = None
+        ) -> MazeRenderer:
     cls = RENDERERS.get(name)
     if not cls:
-        raise ValueError(f"Unknown renderer: '{name}'. Available: {list(RENDERERS.keys())}")
+        raise ValueError(
+                f"""Unknown renderer: '{name}'.
+                 Available: {list(RENDERERS.keys())}"""
+                )
     return cls(colors=colors)
 
 
